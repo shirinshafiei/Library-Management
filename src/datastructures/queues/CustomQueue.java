@@ -7,24 +7,30 @@ import java.util.NoSuchElementException;
 
 public class CustomQueue<T> implements Queue<T> {
     private CustomLinkedList<T> list;
+    private int capacity;
 
-    public CustomQueue() {
+    public CustomQueue(int capacity) {
         list = new CustomLinkedList<>();
+        this.capacity = capacity;
     }
 
     @Override
     public boolean add(Object t) {
+        if (list.size() >= capacity){
+            throw new IllegalArgumentException();
+        }
         list.addLast((T) t);
         return true;
     }
 
     @Override
     public boolean offer(Object t) {
-        try {
+        if (list.size() >= capacity) {
+            return false;
+        }
+        else {
             list.addLast((T) t);
             return true;
-        } catch (Exception e) {
-            return false;
         }
     }
 

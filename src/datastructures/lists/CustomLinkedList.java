@@ -146,16 +146,10 @@ public class CustomLinkedList<T> implements LinkedList<T>{
 
     @Override
     public boolean add(Object o) {
-//        Node<T> newNode = new Node<>();
-//        if (head == null) {
-//            head = newNode;
-//            tail = newNode;
-//        } else {
-//            newNode.prev = tail;
-//            tail.next = newNode;
-//            tail = newNode;
-//        }
-//        size++;
+        if (o == null) {
+            throw new NullPointerException();
+        }
+        addLast((T) o);
         return true;
     }
 
@@ -173,6 +167,9 @@ public class CustomLinkedList<T> implements LinkedList<T>{
 
     @Override
     public boolean remove(Object o) {
+        if (o == null) {
+            throw new NullPointerException();
+        }
         Node<T> current = head;
         while (current != null) {
             if (Objects.equals(o, current.data)) {
