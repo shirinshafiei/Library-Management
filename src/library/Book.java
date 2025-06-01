@@ -1,10 +1,13 @@
 package library;
 
+import datastructures.queues.CustomQueue;
+
 public class Book {
     private String title;
     private String author;
     private String isbn;
     private boolean isAvailable;
+    private CustomQueue<Member> waitList;
 
     // TODO: Define a data structure to hold members waiting for this book
 
@@ -13,6 +16,7 @@ public class Book {
         this.author = author;
         this.isbn = isbn;
         this.isAvailable = true;
+        this.waitList = new CustomQueue<>(1000);
 
         // TODO: Initialize your data structure here
     }
@@ -24,17 +28,17 @@ public class Book {
     public void setAvailable(boolean available) { isAvailable = available; }
 
     public void addToWaitlist(Member member) {
-        // TODO
+        if (member != null) {
+            waitList.add(member);
+        }
     }
 
     public Member getNextInWaitlist() {
-        // TODO
-        return null;
+        return waitList.poll();
     }
 
     public boolean hasWaitlist() {
-        // TODO
-        return false;
+        return !waitList.isEmpty();
     }
 
     @Override
